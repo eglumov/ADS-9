@@ -7,13 +7,13 @@
 #include <vector>
 #include "tree.h"
 
-Tree::Tree(std::vector<char> in) {
+PMTree::PMTree(std::vector<char> in) {
     std::sort(in.begin(), in.end());
     root = new Node('*');
     buildRecursive(root, in);
 }
 
-void Tree::buildRecursive(Node* current, std::vector<char> remaining) {
+void PMTree::buildRecursive(Node* current, std::vector<char> remaining) {
     if (remaining.empty()) return;
     for (size_t i = 0; i < remaining.size(); ++i) {
         Node* child = new Node(remaining[i]);
@@ -24,11 +24,11 @@ void Tree::buildRecursive(Node* current, std::vector<char> remaining) {
     }
 }
 
-Tree::~Tree() {
+PMTree::~PMTree() {
     deleteTree(root);
 }
 
-void Tree::deleteTree(Node* node) {
+void PMTree::deleteTree(Node* node) {
     if (!node) return;
     for (auto child : node->children) {
         deleteTree(child);
@@ -49,14 +49,14 @@ static void dfs(Node* node, std::vector<char>& current,
     if (node->val != '*') current.pop_back();
 }
 
-std::vector<std::vector<char>> getAllPerms(const Tree& tree) {
+std::vector<std::vector<char>> getAllPerms(const PMTree& tree) {
     std::vector<std::vector<char>> result;
     std::vector<char> current;
     dfs(tree.getRoot(), current, result);
     return result;
 }
 
-std::vector<char> getPerm1(const Tree& tree, int num) {
+std::vector<char> getPerm1(const PMTree& tree, int num) {
     std::vector<std::vector<char>> all = getAllPerms(tree);
     if (num <= 0 || num > static_cast<int>(all.size())) {
         return std::vector<char>();
@@ -64,13 +64,13 @@ std::vector<char> getPerm1(const Tree& tree, int num) {
     return all[num - 1];
 }
 
-static long long factorial(int n) {
-    long long res = 1;
+static int64_t factorial(int n) {
+    int64_t res = 1;
     for (int i = 2; i <= n; ++i) res *= i;
     return res;
 }
 
-std::vector<char> getPerm2(const Tree& tree, int num) {
+std::vector<char> getPerm2(const PMTree& tree, int num) {
     std::vector<char> result;
     Node* current = tree.getRoot();
     if (!current) return result;

@@ -10,20 +10,20 @@ struct Node {
     explicit Node(char v) : val(v) {}
 };
 
-class Tree {
+class PMTree {
  private:
     Node* root;
     void buildRecursive(Node* current, std::vector<char> remaining);
     void deleteTree(Node* node);
 
  public:
-    explicit Tree(std::vector<char> in);
-    ~Tree();
+    explicit PMTree(std::vector<char> in);
+    ~PMTree();
     Node* getRoot() const { return root; }
 };
 
-std::vector<std::vector<char>> getAllPerms(const Tree& tree);
-std::vector<char> getPerm1(const Tree& tree, int num);
-std::vector<char> getPerm2(const Tree& tree, int num);
+std::vector<std::vector<char>> getAllPerms(const PMTree& tree);
+std::vector<char> getPerm1(const PMTree& tree, int num);
+std::vector<char> getPerm2(const PMTree& tree, int num);
 
 #endif  // INCLUDE_TREE_H_

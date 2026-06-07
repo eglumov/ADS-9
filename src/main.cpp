@@ -6,7 +6,7 @@
 
 int main() {
     std::vector<char> in = {'1', '2', '3'};
-    Tree tree(in);
+    PMTree tree(in);
 
     auto p1 = getPerm1(tree, 2);
     auto p2 = getPerm2(tree, 2);
